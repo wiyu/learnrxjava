@@ -12,7 +12,7 @@ public class ObservableExercises {
      * @return "Hello World!"
      */
     public Observable<String> exerciseHello() {
-        return Observable.error(new RuntimeException("Not Implemented"));
+        return Observable.just("Hello World!");
     }
 
     /**
@@ -21,7 +21,7 @@ public class ObservableExercises {
      * @param "Hello Name!"
      */
     public Observable<String> exerciseMap(Observable<String> hello) {
-        return Observable.error(new RuntimeException("Not Implemented"));
+        return hello.map(h -> h + " name");
     }
 
     /**
@@ -32,17 +32,17 @@ public class ObservableExercises {
      * 6-Even
      */
     public Observable<String> exerciseFilterMap(Observable<Integer> nums) {
-        return Observable.error(new RuntimeException("Not Implemented"));
+        return nums.filter(n -> Boolean.valueOf(n % 2 == 0)).map(even -> even + "-Even");
     }
 
     /**
      * Flatten out all video in the stream of Movies into a stream of videoIDs
      * 
-     * @param movieLists
+     * @param movies
      * @return Observable of Integers of Movies.videos.id
      */
     public Observable<Integer> exerciseConcatMap(Observable<Movies> movies) {
-        return Observable.error(new RuntimeException("Not Implemented"));
+        return movies.concatMap(m -> m.videos.map(v-> Integer.valueOf(v.id)));
     }
 
     /**
@@ -58,8 +58,8 @@ public class ObservableExercises {
      * @param movieLists
      * @return Observable of Integers of Movies.videos.id
      */
-    public Observable<Integer> exerciseFlatMap(Observable<Movies> movies) {
-        return Observable.error(new RuntimeException("Not Implemented"));
+    public Observable<Integer> exerciseFlatMap (Observable<Movies> movies) {
+        return movies.flatMap(m -> m.videos.map(v -> v.id));
     }
 
     /**
@@ -68,7 +68,7 @@ public class ObservableExercises {
      * Use reduce to select the maximum value in a list of numbers.
      */
     public Observable<Integer> exerciseReduce(Observable<Integer> nums) {
-        return Observable.error(new RuntimeException("Not Implemented"));
+        return nums.reduce((num1, num2) -> num1 >= num2 ? num1 : num2);
     }
 
     /**
